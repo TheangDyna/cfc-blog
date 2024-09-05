@@ -16,6 +16,7 @@ const HomePage = () => {
   const [filter, setFilter] = useState("All");
 
   useEffect(() => {
+    setIsloading(true);
     const q =
       filter == "All"
         ? query(collection(db, "blogs"))
@@ -32,16 +33,14 @@ const HomePage = () => {
     return () => unsubscribe();
   }, [filter]);
 
-  const handleFilter = (filter) => {
-    setIsloading(true);
-    setFilter(filter);
-  };
-
   const isEmptyData = blogs.length === 0;
 
   return (
     <main className="flex flex-col gap-10">
-      <ProductFilterTab active={filter} onFilter={handleFilter} />
+      <ProductFilterTab
+        active={filter}
+        onFilter={(filter) => setFilter(filter)}
+      />
 
       {isLoading && <BlogCardsSkeleton />}
       {!isLoading && isEmptyData && <EmptyData />}

@@ -90,7 +90,7 @@ const BlogEditPage = ({ params }) => {
             value={blogInput.cover}
           />
           <select
-            className="input input-bordered w-ful"
+            className="select input-bordered w-ful"
             required
             onChange={handleChange}
             name="category"
